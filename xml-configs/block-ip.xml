@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SmartResponse>
+    <n>Bitdefender - Block IP Address</n>
+    <Description>Blocks network traffic to/from a malicious IP address in Bitdefender GravityZone across all endpoints</Description>
+    <Version>1.0</Version>
+    <Author>LogRhythm Integration</Author>
+    <Category>Incident Response</Category>
+    
+    <Script>block-ip.ps1</Script>
+    
+    <Parameters>
+        <Parameter>
+            <n>IpAddress</n>
+            <Type>String</Type>
+            <Required>true</Required>
+            <Description>The IP address to block (e.g., 192.168.1.100)</Description>
+        </Parameter>
+        <Parameter>
+            <n>ApiKey</n>
+            <Type>String</Type>
+            <Required>true</Required>
+            <Sensitive>true</Sensitive>
+            <Description>Bitdefender API Key (Base64 encoded)</Description>
+        </Parameter>
+        <Parameter>
+            <n>CompanyId</n>
+            <Type>String</Type>
+            <Required>true</Required>
+            <Description>Bitdefender Company ID</Description>
+        </Parameter>
+        <Parameter>
+            <n>Note</n>
+            <Type>String</Type>
+            <Required>false</Required>
+            <DefaultValue>Blocked by LogRhythm SmartResponse</DefaultValue>
+            <Description>Optional note for the block rule</Description>
+        </Parameter>
+    </Parameters>
+    
+    <Examples>
+        <Example>
+            <Description>Block suspicious IP address</Description>
+            <CommandLine>
+                -IpAddress "192.168.1.100" -ApiKey "YOUR_API_KEY" -CompanyId "YOUR_COMPANY_ID"
+            </CommandLine>
+        </Example>
+        <Example>
+            <Description>Block IP with custom note</Description>
+            <CommandLine>
+                -IpAddress "10.0.0.50" -ApiKey "YOUR_API_KEY" -CompanyId "YOUR_COMPANY_ID" -Note "Malware C2 Server"
+            </CommandLine>
+        </Example>
+    </Examples>
+</SmartResponse>

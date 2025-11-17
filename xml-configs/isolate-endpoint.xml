@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SmartResponse>
+    <n>Bitdefender - Isolate Endpoint</n>
+    <Description>Isolates a compromised endpoint from the network using Bitdefender GravityZone to contain threats</Description>
+    <Version>1.0</Version>
+    <Author>LogRhythm Integration</Author>
+    <Category>Incident Response</Category>
+    
+    <Script>isolate-endpoint.ps1</Script>
+    
+    <Parameters>
+        <Parameter>
+            <n>EndpointName</n>
+            <Type>String</Type>
+            <Required>true</Required>
+            <Description>The name of the endpoint/computer to isolate (e.g., DESKTOP-ABC123)</Description>
+        </Parameter>
+        <Parameter>
+            <n>ApiKey</n>
+            <Type>String</Type>
+            <Required>true</Required>
+            <Sensitive>true</Sensitive>
+            <Description>Bitdefender API Key (Base64 encoded)</Description>
+        </Parameter>
+        <Parameter>
+            <n>CompanyId</n>
+            <Type>String</Type>
+            <Required>true</Required>
+            <Description>Bitdefender Company ID</Description>
+        </Parameter>
+    </Parameters>
+    
+    <Examples>
+        <Example>
+            <Description>Isolate compromised workstation</Description>
+            <CommandLine>
+                -EndpointName "DESKTOP-ABC123" -ApiKey "YOUR_API_KEY" -CompanyId "YOUR_COMPANY_ID"
+            </CommandLine>
+        </Example>
+        <Example>
+            <Description>Isolate server</Description>
+            <CommandLine>
+                -EndpointName "SERVER-WEB01" -ApiKey "YOUR_API_KEY" -CompanyId "YOUR_COMPANY_ID"
+            </CommandLine>
+        </Example>
+    </Examples>
+</SmartResponse>
