@@ -1,9 +1,3 @@
-##############################################
-# Bitdefender GravityZone - Block Hash
-# Description: Blocks a file hash (malware signature)
-# Author: Auto-generated for LogRhythm Integration
-##############################################
-
 param(
     [Parameter(Mandatory=$true)]
     [string]$Hash,
@@ -49,22 +43,24 @@ $body = @{
 
 # Execute API Call
 try {
-    Write-Host "🔒 Blocking hash: $Hash ($Algorithm)..." -ForegroundColor Yellow
+    Write-Host $body
+
+    Write-Host "Blocking hash: $Hash ($Algorithm)..." -ForegroundColor Yellow
     
     $response = Invoke-RestMethod -Uri $apiURL -Headers $headers -Method Post -Body $body -ErrorAction Stop
     
     if ($response.result) {
-        Write-Host "✅ Hash blocked successfully in Bitdefender!" -ForegroundColor Green
+        Write-Host "Hash blocked successfully in Bitdefender!" -ForegroundColor Green
         Write-Host "Response: $($response.result | ConvertTo-Json -Compress)" -ForegroundColor Gray
         exit 0
     } else {
-        Write-Host "⚠️  Unexpected response format" -ForegroundColor Yellow
+        Write-Host "Unexpected response format" -ForegroundColor Yellow
         Write-Host "Response: $($response | ConvertTo-Json)" -ForegroundColor Gray
         exit 1
     }
     
 } catch {
-    Write-Host "❌ ERROR: Failed to block hash" -ForegroundColor Red
+    Write-Host "ERROR: Failed to block hash" -ForegroundColor Red
     Write-Host "Error Details: $($_.Exception.Message)" -ForegroundColor Red
     
     if ($_.ErrorDetails.Message) {

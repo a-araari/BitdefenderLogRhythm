@@ -1,9 +1,3 @@
-##############################################
-# Bitdefender GravityZone - Block IP Address
-# Description: Blocks network traffic from/to an IP
-# Author: Auto-generated for LogRhythm Integration
-##############################################
-
 param(
     [Parameter(Mandatory=$true)]
     [string]$IpAddress,
@@ -59,22 +53,22 @@ $body = @{
 
 # Execute API Call
 try {
-    Write-Host "🔒 Blocking IP address: $IpAddress..." -ForegroundColor Yellow
+    Write-Host "Blocking IP address: $IpAddress..." -ForegroundColor Yellow
     
     $response = Invoke-RestMethod -Uri $apiURL -Headers $headers -Method Post -Body $body -ErrorAction Stop
     
     if ($response.result) {
-        Write-Host "✅ IP address blocked successfully in Bitdefender!" -ForegroundColor Green
+        Write-Host "IP address blocked successfully in Bitdefender!" -ForegroundColor Green
         Write-Host "Blocked: $IpAddress (both directions, all ports)" -ForegroundColor Gray
         exit 0
     } else {
-        Write-Host "⚠️  Unexpected response format" -ForegroundColor Yellow
+        Write-Host "Unexpected response format" -ForegroundColor Yellow
         Write-Host "Response: $($response | ConvertTo-Json)" -ForegroundColor Gray
         exit 1
     }
     
 } catch {
-    Write-Host "❌ ERROR: Failed to block IP address" -ForegroundColor Red
+    Write-Host "ERROR: Failed to block IP address" -ForegroundColor Red
     Write-Host "Error Details: $($_.Exception.Message)" -ForegroundColor Red
     
     if ($_.ErrorDetails.Message) {
